@@ -1,0 +1,29 @@
+{
+  "name": "pukmantha",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "npm run build && wrangler dev --port 8787",
+    "test": "node --test tests/*.test.js",
+    "test:rooms": "node tests/rooms.integration.mjs",
+    "check:assets": "node scripts/check-assets.mjs",
+    "deploy:check": "wrangler deploy --dry-run --outdir .wrangler/deploy-check",
+    "check": "npm test && npm run build && npm run check:assets && npm run deploy:check",
+    "deploy": "npm run build && npm run check:assets && wrangler deploy",
+    "deploy:prebuilt": "npm run check:assets && wrangler deploy",
+    "package": "npm run check && node scripts/package.mjs"
+  },
+  "dependencies": {
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "wrangler": "^4.0.0",
+    "ws": "^8.18.0"
+  }
+}
